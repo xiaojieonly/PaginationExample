@@ -6,6 +6,8 @@
         <attr name="unselected_color" format="color"/>
         <attr name="text_size" format="dimension"/>
         <attr name="rect_size" format="dimension"/>
+        <attr name="count_text" format="string"/>
+        <attr name="page_and_item" format="string"/>
 
     </declare-styleable>
     <declare-styleable name="PaginationRecycleView" parent="PaginationIndicator">

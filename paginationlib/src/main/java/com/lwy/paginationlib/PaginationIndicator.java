@@ -52,6 +52,9 @@ public class PaginationIndicator extends FrameLayout implements View.OnClickList
     private GradientDrawable mDrawableUnselected;
     private LayerDrawable mSpinnerDrawable;
 
+    private String count;
+    private String pageAndItem;
+
     /**
      * 设置分页控件中间的数字显示个数
      *
@@ -92,7 +95,8 @@ public class PaginationIndicator extends FrameLayout implements View.OnClickList
         mNumberTipShowCount = a.getInteger(R.styleable.PaginationIndicator_number_tip_count, 5);
         sTextSize = a.getDimensionPixelSize(R.styleable.PaginationIndicator_text_size, sp2px(getContext(), 16));
         sWidth = a.getDimensionPixelSize(R.styleable.PaginationIndicator_rect_size, 0);
-
+        count = a.getString(R.styleable.PaginationIndicator_count_text);
+        pageAndItem = a.getString(R.styleable.PaginationIndicator_page_and_item);
         if (sWidth == 0) {
             sWidth = dp2px(getContext(), 32);
         }
@@ -178,9 +182,10 @@ public class PaginationIndicator extends FrameLayout implements View.OnClickList
             mPerPageCountAdapter.clear();
         }
         for (int perPageCountChoice : mPerPageCountChoices) {
-            mPerPageCountAdapter.add(perPageCountChoice + "条/页");
+            mPerPageCountAdapter.add(perPageCountChoice + pageAndItem);
         }
         mPerPageCountSpinner.setSelection(0);
+        mPerPageCountAdapter.notifyDataSetChanged();
     }
 
     /**
@@ -190,7 +195,8 @@ public class PaginationIndicator extends FrameLayout implements View.OnClickList
      */
     public void setTotalCount(int totalCount) {
         this.mTotalCount = totalCount;
-        mTotalTv.setText("共" + totalCount + "条");
+        String text = count + totalCount;
+        mTotalTv.setText(text);
         notifyChange();
     }
 
